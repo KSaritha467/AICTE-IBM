@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Study Planner</title>
+  <style>
+    /* Reset and full-page */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: white; /* Full-page white */
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      padding: 20px 0;
+    }
+
+    .planner-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: calc(100% - 60px); /* Full height minus h1 */
+      padding: 20px;
+      width: 100%;
+    }
+
+    .add-task {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    input, select {
+      padding: 10px;
+      font-size: 14px;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    button {
+      padding: 10px 15px;
+      font-size: 14px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+
+    table {
+      width: 100%;
+      max-width: 800px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tr.completed td {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    td.status-btn {
+      text-align: center;
+    }
+
+    td.status-btn button {
+      background: #2196F3;
+    }
+
+    td.status-btn button.completed {
+      background: #f44336;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Weekly Study Planner</h1>
+
+  <div class="planner-container">
+    <div class="add-task">
+      <input type="text" id="taskName" placeholder="Enter Task">
+      <select id="day">
+        <option value="">Select Day</option>
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Sunday">Sunday</option>
+      </select>
+      <input type="time" id="time">
+      <button onclick="addTask()">Add Task</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Day</th>
+          <th>Time</th>
+          <th>Completed</th>
+        </tr>
+      </thead>
+      <tbody id="taskTable">
+        <!-- Tasks will appear here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function addTask() {
+      const taskName = document.getElementById('taskName').value;
+      const day = document.getElementById('day').value;
+      const time = document.getElementById('time').value;
+
+      if (!taskName || !day || !time) {
+        alert('Please fill all fields!');
+        return;
+      }
+
+      const table = document.getElementById('taskTable');
+      const row = table.insertRow();
+
+      const taskCell = row.insertCell(0);
+      const dayCell = row.insertCell(1);
+      const timeCell = row.insertCell(2);
+      const statusCell = row.insertCell(3);
+
+      taskCell.textContent = taskName;
+      dayCell.textContent = day;
+      timeCell.textContent = time;
+
+      const statusBtn = document.createElement('button');
+      statusBtn.textContent = 'Not Completed';
+      statusBtn.onclick = function() {
+        row.classList.toggle('completed');
+        if (row.classList.contains('completed')) {
+          statusBtn.textContent = 'Completed';
+          statusBtn.classList.add('completed');
+        } else {
+          statusBtn.textContent = 'Not Completed';
+          statusBtn.classList.remove('completed');
+        }
+      };
+      statusCell.classList.add('status-btn');
+      statusCell.appendChild(statusBtn);
+
+      document.getElementById('taskName').value = '';
+      document.getElementById('day').value = '';
+      document.getElementById('time').value = '';
+    }
+  </script>
+
+</body>
+</html>
+

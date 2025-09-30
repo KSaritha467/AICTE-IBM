@@ -1,0 +1,10 @@
+DESCENDENT SELECTOR
+section>p{
+color:crimson;
+}
+section>h1{
+color:chartreuse;
+}
+div>p{
+color:darkblue;
+}

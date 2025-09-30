@@ -1,0 +1,23 @@
+/*h1:hover{
+    background-color: chartreuse;
+    color: darkorange;
+}
+button:hover{
+    background-color: rgba(139, 0, 0, 0.055);
+color:rgb(100, 67, 0);
+}*/
+a:link{
+    color: aqua;
+}
+a:visited{
+    color:purple;
+}
+a:active{
+    color: chartreuse;
+}
+input:focus{
+    background-color: black;
+}
+div>p:nth-child(4){ 
+    background-color: chartreuse;
+}
